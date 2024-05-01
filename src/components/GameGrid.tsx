@@ -6,10 +6,10 @@ import useGames from "../hooks/useGames";
 import { Genre } from "../hooks/useGenres";
 
 interface Props {
-    seletecGenre: Genre | null;
+    selectedGenre: Genre | null;
 }
 
-const GameGrid = ({seletecGenre}: Props) => {
+const GameGrid = ({selectedGenre}: Props) => {
   const { data, error, isLoading } = useGames(selectedGenre);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

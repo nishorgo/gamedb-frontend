@@ -1,9 +1,8 @@
-import React from "react";
-import { Game } from "../entities/Game";
-import { Card, CardBody, HStack, Heading, Image, Text } from "@chakra-ui/react";
-import PlatformIconList from "./PlatformIconList";
-import CriticScore from "./CriticScore";
+import { Card, CardBody, HStack, Heading, Image } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Game from "../entities/Game";
+import CriticScore from "./CriticScore";
+import PlatformIconList from "./PlatformIconList";
 
 interface Props {
   game: Game;

@@ -6,11 +6,10 @@ import useGameQueryStore from "../services/store";
 const SortSelector = () => {
   const sortOrders = [
     { value: "", label: "Relevance" },
+    { value: "title", label: "Name" },
     { value: "-added", label: "Date added" },
-    { value: "name", label: "Name" },
-    { value: "-released", label: "Release date" },
-    { value: "-metacritic", label: "Popularity" },
-    { value: "-rating", label: "Average rating" },
+    { value: "-release_date", label: "Release date" },
+    { value: "-average_rating", label: "Average rating" },
   ];
 
   const setSortOrder = useGameQueryStore(s => s.setSortOrder);

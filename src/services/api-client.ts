@@ -7,10 +7,7 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-    baseURL: 'https://api.rawg.io/api/',
-    params: {
-        key: 'dfade1eeedfe48faa83e141e9a9ae60b'
-    }
+    baseURL: 'https://nishorgo.pythonanywhere.com/',
 })
 
 class APIClient<T> {

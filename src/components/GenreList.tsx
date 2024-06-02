@@ -27,12 +27,6 @@ const GenreList = () => {
         {data?.results.map((genre) => (
           <ListItem key={genre.id} paddingY="5px">
             <HStack>
-              <Image
-                boxSize="32px"
-                borderRadius={8}
-                objectFit="cover"
-                src={genre.image_background}
-              />
               <Button
                 whiteSpace="normal"
                 textAlign="left"

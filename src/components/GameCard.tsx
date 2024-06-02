@@ -15,12 +15,11 @@ const GameCard = ({ game }: Props) => {
       <CardBody>
         <HStack justifyContent={"space-between"} marginBottom={1}>
           <PlatformIconList
-            platforms={game.parent_platforms.map((p) => p.platform)}
+            platforms={game.platforms}
           />
-          <CriticScore score={game.metacritic} />
         </HStack>
         <Heading fontSize="2xl">
-          <Link to={"/games/" + game.slug}>{game.name}</Link>
+          <Link to={"/games/" + game.slug}>{game.title}</Link>
         </Heading>
       </CardBody>
     </Card>

@@ -5,13 +5,12 @@ import Publisher from "./Publisher";
 
 export default interface Game {
     id: number;
-    name: string;
+    title: string;
     slug: string;
-    description_raw: string;
+    release_date: string;
+    description: string;
     background_image: string;
     genres: Genre[];
-    publishers: Publisher[];
-    parent_platforms: { platform: Platform; }[];
-    metacritic: number;
-    rating_top: number;
+    publishers: Publisher;
+    platforms: Platform[];
 }

@@ -15,7 +15,7 @@ const GameDetailPage = () => {
   if (error || !game) throw error;
 
   return (
-    <Box margin={10}>
+    <Box marginX={10}>
       <Box>
         <SimpleGrid columns={2} justifyContent={"space-between"}>
           <Heading>{game.title}</Heading>

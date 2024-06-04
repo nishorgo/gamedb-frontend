@@ -23,22 +23,7 @@ const Homepage = () => {
   }
 
   return (
-    <Grid
-      templateAreas={{
-        base: `"main"`,
-        lg: `"nav nav" "aside main"`,
-      }}
-      templateColumns={{
-        base: "1fr",
-        lg: "250px 1fr",
-      }}
-    >
-      <Show above="lg">
-        <GridItem area="aside" paddingX={5}>
-          <GenreList />
-        </GridItem>
-      </Show>
-      <GridItem area="main">
+      <>
         <Box paddingLeft={2}>
           {isAuthenticated && (
             <HStack>
@@ -55,8 +40,7 @@ const Homepage = () => {
           </Flex>
         </Box>
         <GameGrid />
-      </GridItem>
-    </Grid>
+      </>
   );
 };
 

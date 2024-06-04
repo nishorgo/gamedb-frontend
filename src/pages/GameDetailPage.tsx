@@ -1,7 +1,8 @@
-import { GridItem, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
+import { Box, GridItem, HStack, Heading, SimpleGrid, Spinner } from "@chakra-ui/react";
 import { useParams } from "react-router-dom";
 import ExpandableText from "../components/ExpandableText";
 import GameAttributes from "../components/GameAttributes";
+import GameReviews from "../components/GameReviews";
 import GameScreenshots from "../components/GameScreenshots";
 import GameTrailer from "../components/GameTrailer";
 import useGame from "../hooks/useGame";
@@ -14,18 +15,23 @@ const GameDetailPage = () => {
   if (error || !game) throw error;
 
   return (
-    <SimpleGrid columns={{ base: 1, md: 2}} spacing={5}>
-      <GridItem>
-        <Heading>{game.name}</Heading>
-        <ExpandableText>{game.description_raw}</ExpandableText>
+    <Box margin={10}>
+      <Box>
+        <SimpleGrid columns={2} justifyContent={"space-between"}>
+          <Heading>{game.title}</Heading>
+          <Heading>{game.average_rating}/10</Heading>
+        </SimpleGrid>
+        <ExpandableText>{game.description}</ExpandableText>
         <GameAttributes game={game} />
-      </GridItem>
-      <GridItem>
-        <GameTrailer gameId={game.id} />
-        <GameScreenshots gameId={game.id} />
-      </GridItem>
-        
-    </SimpleGrid>
+        <GameTrailer trailerLink={game.trailer} />
+      </Box>
+
+      <Box marginBottom={5}>
+          <GameScreenshots gameId={game.id} />
+      </Box>
+
+      <GameReviews gameId={game.id} />
+    </Box>
   );
 };
 

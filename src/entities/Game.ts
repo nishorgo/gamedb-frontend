@@ -9,8 +9,10 @@ export default interface Game {
     slug: string;
     release_date: string;
     description: string;
+    average_rating: number;
     background_image: string;
     genres: Genre[];
-    publishers: Publisher;
+    publisher: Publisher;
     platforms: Platform[];
+    trailer: string;
 }

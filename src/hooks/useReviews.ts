@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
-import Screenshot from "../entities/Screenshot";
+import Review from "../entities/Review";
 
 
 const useScreenshots = (gameId: number) => {
-    const apiClient = new APIClient<Screenshot>(`/games/${gameId}/images`)
+    const apiClient = new APIClient<Review>(`/games/${gameId}/reviews`);
     
     return useQuery({
-        queryKey: ['screenshots', gameId],
+        queryKey: ['reviews', gameId],
         queryFn: apiClient.getAll
     })
 }

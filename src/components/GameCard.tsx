@@ -19,7 +19,7 @@ const GameCard = ({ game }: Props) => {
           />
         </HStack>
         <Heading fontSize="2xl">
-          <Link to={"/games/" + game.slug}>{game.title}</Link>
+          <Link to={"/games/" + game.id}>{game.title}</Link>
         </Heading>
       </CardBody>
     </Card>

@@ -1,13 +1,13 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants';
+import { ACCESS_TOKEN, REFRESH_TOKEN, BASE_URL } from '../constants';
 
 export interface AuthResponse {
   access: string;
   refresh: string;
 }
 
-const API_URL = 'https://nishorgo.pythonanywhere.com/auth/';
+const API_URL = `${BASE_URL}/auth/`;
 
 const axiosInstance = axios.create({
   baseURL: API_URL,

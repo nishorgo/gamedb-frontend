@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import { BASE_URL } from "../constants";
 
 export interface FetchResponse<T> {
     count: number;
@@ -7,7 +8,7 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-    baseURL: 'https://nishorgo.pythonanywhere.com/',
+    baseURL: BASE_URL,
 })
 
 class APIClient<T> {

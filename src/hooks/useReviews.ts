@@ -3,7 +3,7 @@ import APIClient from "../services/api-client";
 import Review from "../entities/Review";
 
 
-const useScreenshots = (gameId: number) => {
+const useReviews = (gameId: number) => {
     const apiClient = new APIClient<Review>(`/games/${gameId}/reviews`);
     
     return useQuery({
@@ -12,4 +12,4 @@ const useScreenshots = (gameId: number) => {
     })
 }
 
-export default useScreenshots;
+export default useReviews;

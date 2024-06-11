@@ -17,7 +17,6 @@ axiosInstance.interceptors.request.use(
       const token = Cookies.get(ACCESS_TOKEN);
       if (token) {
         config.headers.Authorization = `JWT ${token}`;
-        console.log("Authorization header set: ", config.headers.Authorization);
       }
       return config;
     },

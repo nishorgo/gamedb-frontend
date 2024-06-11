@@ -4,6 +4,7 @@ import { ACCESS_TOKEN } from "../constants";
 import { useAuthStore } from "../stores/authStore";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
+import Layout from "../pages/Layout";
 
 interface JwtPayload {
     token_type: "access" | "refresh";
@@ -44,7 +45,11 @@ const ProtectedRoutes = () => {
   if (!isAuthenticated)
     return <Navigate to="/login" replace />;
 
-  return <Outlet />;
+  return (
+    <>
+      <Layout />
+    </>
+  ) 
 }
 
 export default ProtectedRoutes;

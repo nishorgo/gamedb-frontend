@@ -6,6 +6,7 @@ import ErrorPage from "./pages/ErrorPage";
 import UserRegistration from "./forms/UserRegistration";
 import UserLogin from "./forms/UserLogin";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import MyReviewsPage from "./pages/MyReviewsPage";
 
 const router = createBrowserRouter([
     {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
     {
         element: <ProtectedRoutes />,
         children: [
-            
+            { path: '/my-reviews', element: <MyReviewsPage /> }
         ]
     }
 ]);

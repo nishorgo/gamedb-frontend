@@ -20,7 +20,7 @@ const GameDetailPage = () => {
       <Box>
         <SimpleGrid columns={2} justifyContent={"space-between"}>
           <Heading>{game.title}</Heading>
-          <Heading>{game.average_rating.toFixed(1)}/10</Heading>
+          <Heading>{game.average_rating?.toFixed(1)}/10</Heading>
         </SimpleGrid>
         <Box marginTop={5}>
           <ExpandableText>{game.description}</ExpandableText>

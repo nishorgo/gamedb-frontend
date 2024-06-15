@@ -33,6 +33,7 @@ const PlatformIconList = ({ platforms }: Props) => {
 
   const renderedIcons = new Set<string>();
 
+  
   return (
     <HStack marginY={"10px"}>
       {platforms.map((platform) => {

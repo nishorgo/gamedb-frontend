@@ -20,18 +20,18 @@ interface Props {
 
 const GameReviews = ({ gameId }: Props) => {
   const { data, isLoading, error } = useReviews(gameId);
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const currentUser = useAuthStore((s) => s.username);
   const hasExistingReview = data?.results.some(
     (review) => review.username === currentUser
   );
-  console.log(hasExistingReview);
 
   if (isLoading) return null;
   if (error) throw error;
 
   return (
     <>
-      {!hasExistingReview && (
+      {!hasExistingReview && isAuthenticated && (
         <Box marginBottom={5}>
           <ReviewForm gameId={gameId} />
         </Box>
@@ -39,7 +39,7 @@ const GameReviews = ({ gameId }: Props) => {
 
       {data && data.results
         ? data.results.map((review) => (
-            <Card
+            <Card key={review.id}
               marginBottom={5}
               borderColor="teal"
               borderWidth={2}

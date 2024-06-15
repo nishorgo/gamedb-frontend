@@ -6,6 +6,9 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({ 
     config,
+    fonts: {
+        heading: "'Anton', sans-serif"
+    },
     colors: {
         gray: {
             50: '#f9f9f9',

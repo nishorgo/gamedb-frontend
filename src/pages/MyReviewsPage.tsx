@@ -24,6 +24,7 @@ const MyReviewsPage = () => {
       {data && data.results
         ? data.results.map((review) => (
             <Card
+              key={review.id}
               marginBottom={5}
               borderColor="teal"
               borderWidth={2}

@@ -4,7 +4,7 @@ import APIClient from "../services/api-client";
 
 
 const usePostReview = (gameId: number) => {
-  type ReviewWithoutMetadata = Omit<Review, "id" | "username" | "timestamp">;
+  type ReviewWithoutMetadata = Omit<Review, "id" | "username" | "game_id" | "game_title" | "timestamp">;
   const apiClient = new APIClient<ReviewWithoutMetadata>(`/games/${gameId}/reviews/`)
   const queryClient = useQueryClient();
   

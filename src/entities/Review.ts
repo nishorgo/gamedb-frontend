@@ -1,4 +1,3 @@
-import Game from "./Game";
 
 export default interface Review {
     id: number;

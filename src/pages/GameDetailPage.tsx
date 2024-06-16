@@ -1,4 +1,4 @@
-import { AddIcon, CheckCircleIcon, CheckIcon, ViewIcon } from "@chakra-ui/icons";
+import { AddIcon, CheckCircleIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -7,29 +7,38 @@ import {
   SimpleGrid,
   Spinner,
 } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ExpandableText from "../components/ExpandableText";
 import GameAttributes from "../components/GameAttributes";
 import GameReviews from "../components/GameReviews";
 import GameScreenshots from "../components/GameScreenshots";
 import GameTrailer from "../components/GameTrailer";
-import useGame from "../hooks/useGame";
 import useAddtoWishList from "../hooks/useAddToWishList";
-import { useAuthStore } from "../stores/authStore";
-import { useEffect, useState } from "react";
+import useGame from "../hooks/useGame";
 import useIsInWishlist from "../hooks/useIsInWishlist";
+import { useAuthStore } from "../stores/authStore";
+import useDeleteFromWishlist from "../hooks/useDeleteFromWIshlist";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
   const { data: game, isLoading, error } = useGame(slug!);
   const { data: isInWishlistInitial, isLoading: isInWishlistLoading } = useIsInWishlist(slug!)
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
-  const [isInWishlist, setIsInWishlist] = useState(isInWishlistInitial?.is_in_wishlist);
-  const addToWishList = useAddtoWishList(() => setIsInWishlist(true));
+  const [isInWishlist, setIsInWishlist] = useState(isInWishlistInitial);
+  const addToWishList = useAddtoWishList();
+  const deleteWishlist = useDeleteFromWishlist();
 
   useEffect(() => {
-    setIsInWishlist(isInWishlistInitial?.is_in_wishlist);
+    setIsInWishlist(isInWishlistInitial);
   }, [isInWishlistInitial]);
+
+  const handleDelete = () => {
+    if (isInWishlist !== undefined) {
+      console.log(isInWishlist.wishlist_id);
+      deleteWishlist.mutate(isInWishlist?.wishlist_id);
+    }
+  }
 
   if (isLoading) return <Spinner />;
   if (error || !game) throw error;
@@ -41,7 +50,7 @@ const GameDetailPage = () => {
           <HStack>
             <Heading marginEnd={5}>{game.title}</Heading>
             {isAuthenticated && (
-              isInWishlist ? 
+              isInWishlist?.is_in_wishlist ? 
               <Button
                 variant="solid"
                 colorScheme="teal"
@@ -50,7 +59,7 @@ const GameDetailPage = () => {
                 size="xs"
                 leftIcon={<CheckCircleIcon />}
                 _hover={{ bg: "#2C7A7B", color: "white" }}
-                onClick={() => addToWishList.mutate({ game: game.id })}
+                onClick={handleDelete}
               >
                 In Wishlist
               </Button> :

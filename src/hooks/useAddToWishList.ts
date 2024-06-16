@@ -3,7 +3,7 @@ import Wishlist from "../entities/Wishlist";
 import APIClient from "../services/api-client";
 
 
-const useAddtoWishList = (onSuccessCallback: () => void) => {
+const useAddtoWishList = () => {
   type WishlistWithoutMetadata = {game: number};
   const apiClient = new APIClient<WishlistWithoutMetadata>(`/wishlist/`)
   const queryClient = useQueryClient();
@@ -14,7 +14,6 @@ const useAddtoWishList = (onSuccessCallback: () => void) => {
       queryClient.invalidateQueries({
         queryKey: ["wishlist"],
       });
-      onSuccessCallback();
     },
   });
 }

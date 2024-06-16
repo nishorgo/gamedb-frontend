@@ -3,6 +3,7 @@ import APIClient from "../services/api-client";
 
 export interface IsInWishlist {
     "is_in_wishlist": boolean;
+    "wishlist_id": number;
 }
 
 const apiClient = new APIClient<IsInWishlist>(`/wishlist/is_in_wishlist/`);

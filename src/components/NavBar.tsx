@@ -25,7 +25,7 @@ const NavBar = () => {
             GAMEDB
           </Heading>
         </Link>
-        <Link to={"/"}>
+        <Link to={"/wishlist"}>
           <Heading
             marginEnd="5"
             fontFamily="Anton"
@@ -37,7 +37,7 @@ const NavBar = () => {
             WISHLIST
           </Heading>
         </Link>
-        <Link to={"/"}>
+        <Link to={"/my-reviews"}>
           <Heading
             marginEnd="5"
             fontFamily="Anton"
@@ -53,6 +53,7 @@ const NavBar = () => {
           isAuthenticated ?
           <Link to={"/"}>
             <Heading
+              onClick={() => logout()}
               marginEnd="10"
               fontFamily="Anton"
               letterSpacing="wide"
@@ -63,7 +64,7 @@ const NavBar = () => {
               LOGOUT
             </Heading>
           </Link> : 
-          <Link to={"/"}>
+          <Link to={"/login"}>
             <Heading
               marginEnd="10"
               fontFamily="Anton"

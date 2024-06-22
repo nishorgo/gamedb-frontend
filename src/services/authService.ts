@@ -13,19 +13,6 @@ const axiosInstance = axios.create({
   baseURL: API_URL,
 });
 
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const token = Cookies.get(ACCESS_TOKEN);
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
-
 class AuthService {
   private static instance: AuthService;
 

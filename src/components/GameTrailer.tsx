@@ -1,4 +1,4 @@
-import useTrailers from "../hooks/useTrailers";
+import VideoPlayer from "./VideoPlayer";
 
 interface Props {
   trailerLink: string;
@@ -7,10 +7,7 @@ interface Props {
 const GameTrailer = ({ trailerLink }: Props) => {
 
   return trailerLink ? (
-    <video
-        src={trailerLink} 
-        controls 
-    />
+    <VideoPlayer videoId={trailerLink} />
   ) : null;
 };
 

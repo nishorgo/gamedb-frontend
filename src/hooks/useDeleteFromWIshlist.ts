@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
 
 
-const useDeleteFromWishlist = () => {
+const useDeleteFromWishlist = (onSuccessCallback: () => void) => {
     const apiClient = new APIClient(`/wishlist/`);
     const queryClient = useQueryClient();
     
@@ -13,6 +13,7 @@ const useDeleteFromWishlist = () => {
         queryClient.invalidateQueries({
           queryKey: ["wishlist"],
         });
+        onSuccessCallback();
       },
     });
 }

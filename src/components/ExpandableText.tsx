@@ -10,14 +10,22 @@ const ExpandableText = ({ children }: Props) => {
   const limit = 300;
 
   if (!children) return null;
-  if (children.length <= limit) return <Text>{children}</Text>;
+  if (children.length <= limit) return <Text whiteSpace="pre-line">{children}</Text>;
 
-  const summary = expanded ? children : children.substring(0, limit) + '...';
+  const summary = expanded ? children : children.substring(0, limit) + "...";
 
   return (
-    <Text>
+    <Text whiteSpace="pre-line">
       {summary}
-      <Button marginLeft={1} size="xs" fontWeight='bold' colorScheme="yellow" onClick={() => setExpanded(!expanded)}>{expanded ? "Show Less" : "Read More"}</Button>
+      <Button
+        marginLeft={1}
+        size="xs"
+        fontWeight="bold"
+        colorScheme="yellow"
+        onClick={() => setExpanded(!expanded)}
+      >
+        {expanded ? "Show Less" : "Read More"}
+      </Button>
     </Text>
   );
 };

@@ -15,42 +15,38 @@ import GameReviews from "../components/GameReviews";
 import GameScreenshots from "../components/GameScreenshots";
 import GameTrailer from "../components/GameTrailer";
 import useAddtoWishList from "../hooks/useAddToWishList";
+import useDeleteFromWishlist from "../hooks/useDeleteFromWIshlist";
 import useGame from "../hooks/useGame";
 import useIsInWishlist from "../hooks/useIsInWishlist";
 import { useAuthStore } from "../stores/authStore";
-import useDeleteFromWishlist from "../hooks/useDeleteFromWIshlist";
+import { useQueryClient } from "@tanstack/react-query";
 
 const GameDetailPage = () => {
   const { slug } = useParams();
   const { data: game, isLoading, error } = useGame(slug!);
-  const { data: isInWishlistInitial, isLoading: isInWishlistLoading } = useIsInWishlist(slug!)
+  const { data: isInWishlistInitial, isLoading: isInWishlistLoading } = useIsInWishlist(slug!);
+  const queryClient = useQueryClient();
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
-  const [isInWishlist, setIsInWishlist] = useState(isInWishlistInitial);
-  const addToWishList = useAddtoWishList();
-  const deleteWishlist = useDeleteFromWishlist();
-
-  useEffect(() => {
-    setIsInWishlist(isInWishlistInitial);
-  }, [isInWishlistInitial]);
-
-  const handleDelete = () => {
-    if (isInWishlist !== undefined) {
-      console.log(isInWishlist.wishlist_id);
-      deleteWishlist.mutate(isInWishlist?.wishlist_id);
-    }
-  }
+  const [isInWishlist, setIsInWishlist] = useState(isInWishlistInitial?.is_in_wishlist);
+  const addToWishList = useAddtoWishList(() => {
+    setIsInWishlist(true);
+    queryClient.invalidateQueries(['is_in_wishlist', slug]);
+  });
+  const deleteFromWishList = useDeleteFromWishlist(() => {
+    setIsInWishlist(false);
+    queryClient.invalidateQueries(['is_in_wishlist', slug]);
+  });
 
   if (isLoading) return <Spinner />;
   if (error || !game) throw error;
 
   return (
     <Box marginX={10}>
-      <Box>
         <SimpleGrid columns={2} justifyContent={"space-between"}>
           <HStack>
             <Heading marginEnd={5}>{game.title}</Heading>
             {isAuthenticated && (
-              isInWishlist?.is_in_wishlist ? 
+              isInWishlist ? 
               <Button
                 variant="solid"
                 colorScheme="teal"
@@ -59,7 +55,10 @@ const GameDetailPage = () => {
                 size="xs"
                 leftIcon={<CheckCircleIcon />}
                 _hover={{ bg: "#2C7A7B", color: "white" }}
-                onClick={handleDelete}
+                onClick={() => {
+                  if (isInWishlistInitial)
+                    deleteFromWishList.mutate(isInWishlistInitial.wishlist_id)} 
+                }
               >
                 In Wishlist
               </Button> :
@@ -84,9 +83,8 @@ const GameDetailPage = () => {
         </Box>
         <GameAttributes game={game} />
         <GameTrailer trailerLink={game.trailer} />
-      </Box>
 
-      <Box marginBottom={5}>
+      <Box marginY={5}>
         <GameScreenshots gameId={game.id} />
       </Box>
       <Heading size={"lg"} marginBottom={5}>

@@ -19,6 +19,7 @@ import useDeleteReview from "../hooks/useDeleteReview";
 import useReviews from "../hooks/useReviews";
 import { useAuthStore } from "../stores/authStore";
 import DeleteAlertWindow from "./DeleteAlertWindow";
+import ExpandableText from "./ExpandableText";
 
 interface Props {
   gameId: number;
@@ -107,9 +108,7 @@ const GameReviews = ({ gameId }: Props) => {
               </CardHeader>
 
               <CardBody>
-                <Text pt="2" fontSize="md">
-                  {review.review_body}
-                </Text>
+                <ExpandableText>{review.review_body}</ExpandableText>
               </CardBody>
             </Card>
           ))

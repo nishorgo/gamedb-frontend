@@ -1,10 +1,10 @@
-import { jwtDecode } from "jwt-decode";
-import { Navigate, Outlet } from "react-router-dom";
-import { ACCESS_TOKEN } from "../constants";
-import { useAuthStore } from "../stores/authStore";
 import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { ACCESS_TOKEN } from "../constants";
 import Layout from "../pages/Layout";
+import { useAuthStore } from "../stores/authStore";
 
 interface JwtPayload {
     token_type: "access" | "refresh";

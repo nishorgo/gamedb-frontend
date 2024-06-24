@@ -15,9 +15,9 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useRegisterUser } from "../hooks/useRegisterUser";
-import { Navigate } from "react-router-dom";
 
 const schema = z.object({
   username: z.string().min(3),
@@ -31,6 +31,8 @@ const UserRegistration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleShowButton = () => setShowPassword(!showPassword);
   const { mutate, isLoading, error } = useRegisterUser();
+  const navigate = useNavigate();
+
 
   const {
     register,
@@ -40,7 +42,7 @@ const UserRegistration = () => {
 
   const onSubmit = async (user: UserSchema) => {
     mutate(user);
-    return <Navigate to="/login" />;
+    return navigate("/login");
   };
 
   return (

@@ -15,9 +15,9 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { redirect, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useAuthStore } from "../stores/authStore";
-import { Navigate } from "react-router-dom";
 
 const schema = z.object({
   username: z.string().min(3),
@@ -30,6 +30,7 @@ const UserLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleShowButton = () => setShowPassword(!showPassword);
   const { login } = useAuthStore();
@@ -50,6 +51,7 @@ const UserLogin = () => {
       setError(errorMessage);
     } finally {
       setIsLoading(false);
+      return navigate('/');
     }
   };
 

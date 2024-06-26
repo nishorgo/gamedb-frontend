@@ -11,11 +11,13 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Link,
+  Text
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { redirect, useNavigate } from "react-router-dom";
+import { Link as RouterLink, redirect, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useAuthStore } from "../stores/authStore";
 
@@ -85,7 +87,7 @@ const UserLogin = () => {
             )}
           </FormControl>
 
-          <FormControl marginBottom={5}>
+          <FormControl>
             <FormLabel>Password</FormLabel>
             <InputGroup size="md">
               <Input
@@ -110,6 +112,12 @@ const UserLogin = () => {
               <p className="text-danger">{errors.password.message}</p>
             )}
           </FormControl>
+          <Text marginY={2}>
+            Don't have an account?  
+            <Link as={RouterLink} to="/register" color="teal.200" marginLeft={1}>
+              Register
+            </Link>
+          </Text>
           <Button
             isLoading={isLoading}
             colorScheme="teal"

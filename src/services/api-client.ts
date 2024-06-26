@@ -8,22 +8,9 @@ export interface FetchResponse<T> {
     results: T[];
 }
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
     baseURL: BASE_URL,
 });
-
-axiosInstance.interceptors.request.use(
-    (config) => {
-      const token = Cookies.get(ACCESS_TOKEN);
-      if (token) {
-        config.headers.Authorization = `JWT ${token}`;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-);
 
 class APIClient<T> {
     endpoint: string;

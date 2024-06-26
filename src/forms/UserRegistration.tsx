@@ -11,11 +11,13 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Link,
+  Text
 } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import { useRegisterUser } from "../hooks/useRegisterUser";
 
@@ -63,7 +65,7 @@ const UserRegistration = () => {
           </Alert>
         )}
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormControl marginBottom={5}>
+          <FormControl marginBottom={2}>
             <FormLabel>Username</FormLabel>
             <Input
               {...register("username")}
@@ -74,7 +76,7 @@ const UserRegistration = () => {
               <p className="text-danger">{errors.username.message}</p>
             )}
           </FormControl>
-          <FormControl marginBottom={5}>
+          <FormControl marginBottom={2}>
             <FormLabel>Email</FormLabel>
             <Input
               {...register("email")}
@@ -85,7 +87,7 @@ const UserRegistration = () => {
               <p className="text-danger">{errors.email.message}</p>
             )}
           </FormControl>
-          <FormControl marginBottom={5}>
+          <FormControl>
             <FormLabel>Password</FormLabel>
             <InputGroup size="md">
               <Input
@@ -105,6 +107,12 @@ const UserRegistration = () => {
               <p className="text-danger">{errors.password.message}</p>
             )}
           </FormControl>
+          <Text marginY={2}>
+            Already have an account?  
+            <Link as={RouterLink} to="/login" color="teal.200" marginLeft={1}>
+              Login
+            </Link>
+          </Text>
           <Button
             isLoading={isLoading}
             colorScheme="teal"

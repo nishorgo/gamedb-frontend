@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { ACCESS_TOKEN } from "../constants";
 import Layout from "../pages/Layout";
 import { useAuthStore } from "../stores/authStore";
+import { axiosInstance } from "../services/api-client";
 
 interface JwtPayload {
     token_type: "access" | "refresh";
@@ -20,6 +21,7 @@ const ProtectedRoutes = () => {
     const handleAuth = async () => {
       try {
         const token = Cookies.get(ACCESS_TOKEN);
+
         if (!token) {
             logout();
             return;
@@ -31,6 +33,14 @@ const ProtectedRoutes = () => {
 
         if (tokenExpiration < now) {
           await refresh();
+        } else {
+          axiosInstance.interceptors.request.use(
+            (config) => {
+              config.headers.Authorization = `JWT ${token}`; 
+              return config;
+            },
+            (error) => Promise.reject(error)
+        );
         }
       } catch (error) {
           console.error('Authentication error:', error);
